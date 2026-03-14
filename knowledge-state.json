@@ -1,0 +1,88 @@
+{
+  "last_updated": "2026-03-14",
+  "overall_stage": "Pre-assessment",
+  "modules": {
+    "module_0_prerequisites": {
+      "status": "not_started",
+      "started": null,
+      "last_touched": null,
+      "strengths": [],
+      "gaps": [],
+      "build_challenge_status": "not_started",
+      "notes": "Initial assessment needed. Student has neuroscience degree, data science role, general ML familiarity. Specific transformer knowledge depth unknown."
+    },
+    "module_1_transformer_internals": {
+      "status": "not_started",
+      "started": null,
+      "last_touched": null,
+      "strengths": [],
+      "gaps": [],
+      "build_challenge_status": "not_started",
+      "notes": ""
+    },
+    "module_2_residual_stream_composition": {
+      "status": "not_started",
+      "started": null,
+      "last_touched": null,
+      "strengths": [],
+      "gaps": [],
+      "build_challenge_status": "not_started",
+      "notes": ""
+    },
+    "module_3_logit_attribution": {
+      "status": "not_started",
+      "started": null,
+      "last_touched": null,
+      "strengths": [],
+      "gaps": [],
+      "build_challenge_status": "not_started",
+      "notes": ""
+    },
+    "module_4_attention_patterns": {
+      "status": "not_started",
+      "started": null,
+      "last_touched": null,
+      "strengths": [],
+      "gaps": [],
+      "build_challenge_status": "not_started",
+      "notes": ""
+    },
+    "module_5_activation_patching": {
+      "status": "not_started",
+      "started": null,
+      "last_touched": null,
+      "strengths": [],
+      "gaps": [],
+      "build_challenge_status": "not_started",
+      "notes": ""
+    },
+    "module_6_sparse_autoencoders": {
+      "status": "not_started",
+      "started": null,
+      "last_touched": null,
+      "strengths": [],
+      "gaps": [],
+      "build_challenge_status": "not_started",
+      "notes": ""
+    },
+    "module_7_circuits": {
+      "status": "not_started",
+      "started": null,
+      "last_touched": null,
+      "strengths": [],
+      "gaps": [],
+      "build_challenge_status": "not_started",
+      "notes": ""
+    }
+  },
+  "cross_cutting": {
+    "python_comfort": "high — uses Python professionally as a data scientist",
+    "pytorch_comfort": "unknown — assess during Module 0",
+    "math_comfort": "unknown — likely decent given DS role and GT masters, but linear algebra depth unclear",
+    "visualization_skills": "likely strong given data science background — assess preferred tools",
+    "neuroscience_bridges_used": [],
+    "recurring_misconceptions": [],
+    "learning_preferences": "Socratic, explain-to-learn, motivated by building, prefers engagement over reading, connects well through analogy"
+  },
+  "session_log": []
+}
