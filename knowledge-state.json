@@ -1,15 +1,29 @@
 {
-  "last_updated": "2026-03-14",
-  "overall_stage": "Pre-assessment",
+  "last_updated": "2026-03-15",
+  "overall_stage": "Module 0 complete, starting Module 1: Transformer Internals",
   "modules": {
     "module_0_prerequisites": {
-      "status": "not_started",
-      "started": null,
-      "last_touched": null,
-      "strengths": [],
-      "gaps": [],
+      "status": "can_explain",
+      "started": "2026-03-15",
+      "last_touched": "2026-03-15",
+      "strengths": [
+        "Neural network fundamentals — clean neuroscience-to-ML bridge, weighted summation, threshold activation",
+        "Gradient descent — strong geometric intuition (loss landscape, rolling ball), understands n-dimensional generalization",
+        "Backpropagation — solid conceptual grasp, waterfall analogy for recursive credit assignment, identified vanishing gradient problem independently",
+        "Residual connections — arrived at the insight through guided derivation, understood 'learn the residual' framing, strong composability analogy",
+        "Residual stream as shared workspace — grasps the communication mechanism (addition as writing to shared state)",
+        "Generalization — train/test split, overfitting awareness, stopping criteria",
+        "Python/data science tooling — professional-level, daily use"
+      ],
+      "gaps": [
+        "Transformer attention mechanism — has correct vibes (input-dependent, flexible routing) but no step-by-step mechanical understanding. Confused attention (cross-position within a layer) with cross-layer information flow",
+        "Queries, keys, values — can guess at query role, familiar with KV from programming but not their transformer function",
+        "PyTorch syntax — rusty (~1 year), concepts intact, would need docs for specifics",
+        "Calculus — intuitive understanding of derivatives/gradients, cannot reliably compute chain rule by hand. Sufficient for mech interp (PyTorch handles computation)",
+        "RNNs — slight misconception about fixed window vs hidden state with effective fixed window due to vanishing gradients"
+      ],
       "build_challenge_status": "not_started",
-      "notes": "Initial assessment needed. Student has neuroscience degree, data science role, general ML familiarity. Specific transformer knowledge depth unknown."
+      "notes": "Extremely strong at building intuition through analogy (neuroscience, software engineering composability, waterfall). Honest about uncertainty boundaries — flags when guessing vs knowing. Prefers concrete examples over abstraction. The neuroscience bridge will be very productive throughout the curriculum."
     },
     "module_1_transformer_internals": {
       "status": "not_started",
@@ -18,7 +32,7 @@
       "strengths": [],
       "gaps": [],
       "build_challenge_status": "not_started",
-      "notes": ""
+      "notes": "Plan: start with concrete token-by-token walkthrough of transformer processing a short sentence. Build to QKV through the problem they solve rather than top-down definition."
     },
     "module_2_residual_stream_composition": {
       "status": "not_started",
@@ -27,7 +41,7 @@
       "strengths": [],
       "gaps": [],
       "build_challenge_status": "not_started",
-      "notes": ""
+      "notes": "Already has partial understanding of residual stream from Module 0. May be able to move through this faster."
     },
     "module_3_logit_attribution": {
       "status": "not_started",
@@ -54,7 +68,7 @@
       "strengths": [],
       "gaps": [],
       "build_challenge_status": "not_started",
-      "notes": ""
+      "notes": "Electrode analogy already resonated — neuroscience bridge to lesion studies will be strong here."
     },
     "module_6_sparse_autoencoders": {
       "status": "not_started",
@@ -76,13 +90,44 @@
     }
   },
   "cross_cutting": {
-    "python_comfort": "high — uses Python professionally as a data scientist",
-    "pytorch_comfort": "unknown — assess during Module 0",
-    "math_comfort": "unknown — likely decent given DS role and GT masters, but linear algebra depth unclear",
-    "visualization_skills": "likely strong given data science background — assess preferred tools",
-    "neuroscience_bridges_used": [],
-    "recurring_misconceptions": [],
-    "learning_preferences": "Socratic, explain-to-learn, motivated by building, prefers engagement over reading, connects well through analogy"
+    "python_comfort": "high — professional data scientist, daily use",
+    "pytorch_comfort": "moderate — has built nets from scratch and used built-in models, but ~1 year rusty. Concepts solid, syntax needs refreshing. More comfortable with NumPy.",
+    "math_comfort": "intuitive, not computational. Strong geometric intuition for gradients and high-dimensional spaces. Calculus is fuzzy on rules but understands what derivatives/integrals mean. Sufficient for mech interp work.",
+    "visualization_skills": "likely strong given DS background — not yet assessed on Plotly specifically",
+    "neuroscience_bridges_used": [
+      "Neurons and weighted summation → artificial neurons (natural, self-generated)",
+      "Waterfall/river system → backprop credit assignment and vanishing gradients (self-generated, excellent)",
+      "Residual stream as shared cortical workspace (introduced, clicked)",
+      "Electrode recordings → activation pattern analysis (introduced, resonated)"
+    ],
+    "recurring_misconceptions": [
+      "Initially confused attention's cross-position routing with cross-layer information flow — corrected"
+    ],
+    "learning_preferences": "Builds understanding through analogy (neuroscience, software engineering). Honest about uncertainty boundaries. Prefers to be pushed rather than validated. Responds well to concrete examples over abstraction. Wants pushback, not empty agreement."
   },
-  "session_log": []
+  "session_log": [
+    {
+      "date": "2026-03-15",
+      "topics_covered": [
+        "Neural network fundamentals (neurons, weights, activation)",
+        "Gradient descent and loss landscapes",
+        "Backpropagation and the chain rule",
+        "Vanishing gradient problem",
+        "Residual connections and the residual stream",
+        "Residual stream as shared workspace",
+        "PyTorch comfort assessment",
+        "Transformer attention — surface-level probe"
+      ],
+      "key_insights": [
+        "Residual layers learn 'what to add' not 'the whole representation' — composability analogy from software engineering",
+        "Addition preserves gradient magnitude where multiplication shrinks it",
+        "Attention routes information across positions within a layer, not across layers"
+      ],
+      "remaining_questions": [
+        "How do queries, keys, and values actually work mechanically?",
+        "What makes multi-head attention useful?",
+        "How does a transformer process a sentence step by step?"
+      ]
+    }
+  ]
 }
