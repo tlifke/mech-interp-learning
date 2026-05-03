@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-03-15",
-  "overall_stage": "Module 0 complete, starting Module 1: Transformer Internals",
+  "last_updated": "2026-04-18",
+  "overall_stage": "Module 1: Transformer Internals — build challenge assigned",
   "modules": {
     "module_0_prerequisites": {
       "status": "can_explain",
@@ -10,29 +10,44 @@
         "Neural network fundamentals — clean neuroscience-to-ML bridge, weighted summation, threshold activation",
         "Gradient descent — strong geometric intuition (loss landscape, rolling ball), understands n-dimensional generalization",
         "Backpropagation — solid conceptual grasp, waterfall analogy for recursive credit assignment, identified vanishing gradient problem independently",
-        "Residual connections — arrived at the insight through guided derivation, understood 'learn the residual' framing, strong composability analogy",
-        "Residual stream as shared workspace — grasps the communication mechanism (addition as writing to shared state)",
+        "Residual connections — arrived at the insight through guided derivation, understood 'learn the residual' framing",
         "Generalization — train/test split, overfitting awareness, stopping criteria",
         "Python/data science tooling — professional-level, daily use"
       ],
       "gaps": [
-        "Transformer attention mechanism — has correct vibes (input-dependent, flexible routing) but no step-by-step mechanical understanding. Confused attention (cross-position within a layer) with cross-layer information flow",
-        "Queries, keys, values — can guess at query role, familiar with KV from programming but not their transformer function",
         "PyTorch syntax — rusty (~1 year), concepts intact, would need docs for specifics",
-        "Calculus — intuitive understanding of derivatives/gradients, cannot reliably compute chain rule by hand. Sufficient for mech interp (PyTorch handles computation)",
-        "RNNs — slight misconception about fixed window vs hidden state with effective fixed window due to vanishing gradients"
+        "Calculus — intuitive understanding of derivatives/gradients, cannot reliably compute chain rule by hand. Sufficient for mech interp"
       ],
       "build_challenge_status": "not_started",
-      "notes": "Extremely strong at building intuition through analogy (neuroscience, software engineering composability, waterfall). Honest about uncertainty boundaries — flags when guessing vs knowing. Prefers concrete examples over abstraction. The neuroscience bridge will be very productive throughout the curriculum."
+      "notes": "Extremely strong at building intuition through analogy (neuroscience, software engineering composability, waterfall). Honest about uncertainty boundaries — flags when guessing vs knowing. Prefers concrete examples over abstraction."
     },
     "module_1_transformer_internals": {
-      "status": "not_started",
-      "started": null,
-      "last_touched": null,
-      "strengths": [],
-      "gaps": [],
-      "build_challenge_status": "not_started",
-      "notes": "Plan: start with concrete token-by-token walkthrough of transformer processing a short sentence. Build to QKV through the problem they solve rather than top-down definition."
+      "status": "can_explain",
+      "started": "2026-03-15",
+      "last_touched": "2026-04-18",
+      "strengths": [
+        "Token embeddings — understands lookup from vocab to 768-dim vector, clear on what dimensionality buys you (resolution of concepts)",
+        "Positional encodings — understands why position-blind attention is broken (dog bites man vs man bites dog), grasps learned additive position vectors, correctly identified conflation risk as mostly a feature not a bug",
+        "Residual stream — solid grasp as shared communication bus, understands it's a vector (not matrix) that accumulates via addition, knows contributions are recoverable for interpretability",
+        "Q/K/V mechanics — strong understanding. Knows Q='what am I looking for', K='what should I be selected for', V='what I send when selected'. Understands all three are learned projections of the residual stream through shared weight matrices (768->64). Arrived at key != value insight through neurotransmitter analogy",
+        "Attention computation — understands dot product of Q and K for similarity scoring, scaling by sqrt(d_k) to prevent softmax saturation, softmax for weighting, weighted sum of V vectors as output. No binary match threshold, always continuous mixture",
+        "Multi-head attention — understands parallel independent heads as analogous to V1 orientation columns. 12 heads per layer, each with own W_Q/W_K/W_V/W_O. Gets that heads project from 768 to 64 dims (learned projection, not literal slice). Output projection W_O maps 64 back to 768",
+        "Shared weights across positions — clear that W_Q is same for all positions, input-dependence comes from different residual streams going in",
+        "MLP role — understands as two-layer network (768->3072->768) with GELU activation. Knows 4x expansion provides more feature detectors for intermediate computation. Understands universal approximation theorem motivation for two layers",
+        "Unembedding — understands matrix multiply of residual stream against embedding matrix to produce logits, logits as similarity scores, softmax to probabilities",
+        "LayerNorm — understands pre-norm placement (before attention and before MLP), learned scale/shift for restoring representational flexibility, purpose of stabilizing training",
+        "GELU vs ReLU — understands dying ReLU problem (dead neurons get zero gradient forever), GELU preserves small gradients for training stability",
+        "Full forward pass — can walk through embedding → (LayerNorm → attention → add → LayerNorm → MLP → add) × 12 → LayerNorm → unembedding → softmax",
+        "Math formalization — can write out attention score computation (q_t dot k_s / sqrt(d_k)), softmax, weighted sum of values, output projection, MLP equations. Understands all tensor shapes through the forward pass",
+        "Architecture design reasoning — understands dimension ratios (768/64/3072) as empirical conventions, asked about looped MLPs and independently arrived at Universal Transformer concept"
+      ],
+      "gaps": [
+        "OV circuit as separate concept — mentioned but not explored (Module 2 topic)",
+        "Build challenge — assigned, not started"
+      ],
+      "build_challenge_status": "assigned",
+      "build_challenge_description": "Residual stream visualizer: load GPT-2 small via TransformerLens, extract residual stream at every layer, PCA to 2D, Plotly figure showing token trajectories through layers. CLI entry point: python -m visualizer.residual_stream 'The cat sat on the'. JSON export for blog embedding.",
+      "notes": "Conceptual understanding of Module 1 is strong — elevated to 'can_explain' status. Student can walk through the full forward pass both conceptually and mathematically. Neurotransmitter analogy for key vs value was a breakthrough. Showed strong architectural intuition by independently proposing looped MLPs (Universal Transformer concept). Distinguishes between architecture design questions (training dynamics) and mechanistic behavior questions (what the trained model does). Ready for build challenge."
     },
     "module_2_residual_stream_composition": {
       "status": "not_started",
@@ -41,45 +56,9 @@
       "strengths": [],
       "gaps": [],
       "build_challenge_status": "not_started",
-      "notes": "Already has partial understanding of residual stream from Module 0. May be able to move through this faster."
+      "notes": ""
     },
     "module_3_logit_attribution": {
-      "status": "not_started",
-      "started": null,
-      "last_touched": null,
-      "strengths": [],
-      "gaps": [],
-      "build_challenge_status": "not_started",
-      "notes": ""
-    },
-    "module_4_attention_patterns": {
-      "status": "not_started",
-      "started": null,
-      "last_touched": null,
-      "strengths": [],
-      "gaps": [],
-      "build_challenge_status": "not_started",
-      "notes": ""
-    },
-    "module_5_activation_patching": {
-      "status": "not_started",
-      "started": null,
-      "last_touched": null,
-      "strengths": [],
-      "gaps": [],
-      "build_challenge_status": "not_started",
-      "notes": "Electrode analogy already resonated — neuroscience bridge to lesion studies will be strong here."
-    },
-    "module_6_sparse_autoencoders": {
-      "status": "not_started",
-      "started": null,
-      "last_touched": null,
-      "strengths": [],
-      "gaps": [],
-      "build_challenge_status": "not_started",
-      "notes": ""
-    },
-    "module_7_circuits": {
       "status": "not_started",
       "started": null,
       "last_touched": null,
@@ -90,43 +69,96 @@
     }
   },
   "cross_cutting": {
-    "python_comfort": "high — professional data scientist, daily use",
-    "pytorch_comfort": "moderate — has built nets from scratch and used built-in models, but ~1 year rusty. Concepts solid, syntax needs refreshing. More comfortable with NumPy.",
-    "math_comfort": "intuitive, not computational. Strong geometric intuition for gradients and high-dimensional spaces. Calculus is fuzzy on rules but understands what derivatives/integrals mean. Sufficient for mech interp work.",
-    "visualization_skills": "likely strong given DS background — not yet assessed on Plotly specifically",
+    "python_comfort": "high — professional daily use, data science workflows",
+    "math_comfort": "Solid. Can write out full attention equations with correct tensor shapes. Intuitive geometric reasoning. Phone typing makes notation hard but understanding is there.",
+    "visualization_skills": "strong design sense, familiar with Plotly, has Next.js blog for embedding",
     "neuroscience_bridges_used": [
-      "Neurons and weighted summation → artificial neurons (natural, self-generated)",
-      "Waterfall/river system → backprop credit assignment and vanishing gradients (self-generated, excellent)",
-      "Residual stream as shared cortical workspace (introduced, clicked)",
-      "Electrode recordings → activation pattern analysis (introduced, resonated)"
+      "Neurons and weighted summation → artificial neurons and activation functions",
+      "Receptive fields in V1 → attention heads as parallel feature detectors",
+      "V1 orientation columns → multi-head attention with independent learned projections",
+      "Neurotransmitter receptor profile vs downstream signal → key vs value vectors (breakthrough analogy)",
+      "Lesion studies → activation patching (previewed, not yet taught)",
+      "Global workspace theory → residual stream as shared communication bus",
+      "Relay nucleus (LGN) vs association area (IT cortex) → attention (routing) vs MLP (processing)",
+      "White matter tracts vs local cortical computation → attention vs MLP",
+      "Sparse coding in visual cortex → superposition (previewed)",
+      "CNN feature detectors and combination → MLP expansion/contraction for feature detection"
     ],
     "recurring_misconceptions": [
-      "Initially confused attention's cross-position routing with cross-layer information flow — corrected"
+      "Initially confused attention heads as literal vector slices rather than learned projections — corrected and understood",
+      "Initially conflated key and value — resolved through neurotransmitter analogy",
+      "Briefly thought attention had a binary match threshold — corrected to continuous mixture",
+      "Confused dot product output shape (thought q·k produced [64,64] matrix instead of scalar) — corrected, understands contraction of inner dimension",
+      "Misattributed GELU advantage to preserving information rather than preserving gradients — corrected to dying ReLU / training stability framing"
     ],
-    "learning_preferences": "Builds understanding through analogy (neuroscience, software engineering). Honest about uncertainty boundaries. Prefers to be pushed rather than validated. Responds well to concrete examples over abstraction. Wants pushback, not empty agreement."
+    "architectural_curiosity": [
+      "Asked why specific dimension ratios (768/64/3072) — empirical conventions",
+      "Independently proposed looped MLP concept — connected to Universal Transformers and adaptive computation",
+      "Noted distinction between architecture design questions and mechanistic behavior questions",
+      "Flagged interest in limitations of expand-then-contract MLP pattern — revisit later"
+    ]
   },
   "session_log": [
     {
       "date": "2026-03-15",
       "topics_covered": [
-        "Neural network fundamentals (neurons, weights, activation)",
-        "Gradient descent and loss landscapes",
-        "Backpropagation and the chain rule",
-        "Vanishing gradient problem",
-        "Residual connections and the residual stream",
-        "Residual stream as shared workspace",
-        "PyTorch comfort assessment",
-        "Transformer attention — surface-level probe"
+        "Module 0 full prerequisite assessment",
+        "Neural net fundamentals, backprop, gradient descent, residual connections",
+        "Began Module 1: established need for cross-position information flow"
       ],
       "key_insights": [
-        "Residual layers learn 'what to add' not 'the whole representation' — composability analogy from software engineering",
-        "Addition preserves gradient magnitude where multiplication shrinks it",
-        "Attention routes information across positions within a layer, not across layers"
+        "Residual connections as 'learn the residual' — derived through guided questioning",
+        "Strong neuroscience-to-ML analogies identified for use throughout curriculum"
       ],
       "remaining_questions": [
-        "How do queries, keys, and values actually work mechanically?",
-        "What makes multi-head attention useful?",
-        "How does a transformer process a sentence step by step?"
+        "Transformer attention mechanism — identified as primary learning target"
+      ]
+    },
+    {
+      "date": "2026-04-15",
+      "topics_covered": [
+        "Q/K/V mechanics in depth — from problem motivation through full understanding",
+        "Key vs value distinction (neurotransmitter analogy breakthrough)",
+        "Multi-head attention and 768→64 projections",
+        "Shared weight matrices across positions",
+        "MLP role as processing vs attention as communication",
+        "Unembedding and logits",
+        "Positional encodings (learned, additive)",
+        "LayerNorm (pre-norm, learned scale/shift)"
+      ],
+      "key_insights": [
+        "Key != value clicked via neurotransmitter analogy: receptor profile (key) vs downstream signal (value)",
+        "Head projections are cameras/perspectives on full 768-dim space, not literal slices",
+        "Logits as similarity between residual stream and token embeddings",
+        "Positional conflation is mostly a feature — 768 dims provides enough room"
+      ],
+      "remaining_questions": [
+        "Math formalization",
+        "Build challenge"
+      ]
+    },
+    {
+      "date": "2026-04-18",
+      "topics_covered": [
+        "Math formalization of full forward pass",
+        "Tensor shapes through entire architecture (embeddings, Q/K/V projections, attention scores, weighted sum, output projection, MLP)",
+        "sqrt(d_k) scaling motivation",
+        "GELU vs ReLU — dying ReLU problem and gradient preservation",
+        "MLP expansion ratio (4x) and universal approximation theorem",
+        "Architecture design reasoning — dimension choices, looped MLPs, Universal Transformers",
+        "Distinction between architecture design questions and mechanistic behavior questions",
+        "Build challenge assigned: residual stream visualizer"
+      ],
+      "key_insights": [
+        "All weight matrices in the model are trainable — the architecture is trainable matrices connected by fixed operations",
+        "Dot product contracts the inner dimension to produce a scalar — resolved shape confusion",
+        "Independently arrived at Universal Transformer concept through first-principles reasoning about looped MLPs",
+        "Training dynamics (why the architecture) vs mechanistic behavior (what the model does) are related but distinct questions"
+      ],
+      "remaining_questions": [
+        "Build challenge implementation",
+        "Revisit limitations of expand-contract MLP pattern",
+        "OV circuit (Module 2)"
       ]
     }
   ]
